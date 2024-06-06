@@ -3,8 +3,7 @@
 This package provides a map-like object for Go that backs to a
 `map[any]any`, but unlike direct usage of a `map[any]any`, when
 retrieving a value out of the map, the type is statically-known at
-compile time and thus does not need to be checked. See the example in
-the godoc.
+compile time and thus does not need to be checked. See [the example](https://github.com/thejerf/mtmap/blob/main/mtmap_test.go).
 
 # Pull Requests
 
