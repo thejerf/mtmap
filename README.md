@@ -3,8 +3,7 @@
 This package provides a map-like object for Go that backs to a
 `map[any]any`, but unlike direct usage of a `map[any]any`, when
 retrieving a value out of the map, the type is statically-known at
-compile time and thus does not need to be checked. See the example in
-the godoc.
+compile time and thus does not need to be checked. See [the example](https://github.com/thejerf/mtmap/blob/main/mtmap_test.go).
 
 # Pull Requests
 
@@ -30,7 +29,7 @@ is useful in my testing, but some users may not appreciate the
 abstraction being penetrated, even for testing code. Others may
 require it.
 
-This package as specified also only requires Go 1.18. There are many
+This package as specified also only requires Go 1.21. There are many
 possible ways to integrate this with range support, with different
 performance tradeoffs that one user who only ever stores a few
 different keys in this may be fine with, but could be a stopper for
