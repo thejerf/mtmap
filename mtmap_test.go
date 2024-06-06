@@ -10,7 +10,7 @@ type MyTypedKey[T any] struct{ mtmap.Key[T] }
 
 type MyBoolKey struct{ mtmap.Key[bool] }
 
-func ExampleMTMap() {
+func Example_mtMap() {
 	m := &mtmap.Map{}
 
 	// Set some values
