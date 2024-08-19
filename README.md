@@ -29,11 +29,12 @@ is useful in my testing, but some users may not appreciate the
 abstraction being penetrated, even for testing code. Others may
 require it.
 
-This package as specified also only requires Go 1.21. There are many
-possible ways to integrate this with range support, with different
-performance tradeoffs that one user who only ever stores a few
-different keys in this may be fine with, but could be a stopper for
-someone storing a lot of keys.
+This package as specified also only requires Go 1.21. It is somewhat
+unclear how to integrate this with iteration. The most obvious way, to
+yield an `any`/`any` key-value pair, seems to violate the type safety
+we're seeking in the first place. Other options have a widely varying
+range of efficiencies and it's not clear to me how to pick one
+universal answer.
 
 Thus, rather than try to be all things to all people, my suggestion is
 that if you like the looks of this package, but need some other
@@ -49,3 +50,13 @@ As such, this is released under the Unlicense license, the closest
 thing I can find to just putting this in the public domain. There are
 no restrictions on this use, not even an attribution restriction.
 
+# Version History
+
+* v1.0.1 - I found a bit of a corner case where if the key specifies
+  an interface, and you explicitly set a `nil` into the map, it would
+  panic on the attempt to retrieve it because the `nil` could not be
+  type-casted back into the interface value. This fixes that so the
+  normal, expected behavior of maps is maintained; a key can be empty,
+  literally contain a `nil`, or contain any value the interface can
+  represent.
+* v1.0.0 - Initial release.

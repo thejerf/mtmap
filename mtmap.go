@@ -29,7 +29,22 @@ func Get2[V any](m *Map, key key[V]) (V, bool) {
 	if !exists {
 		return zero, false
 	}
-	return val.(V), true
+
+	// Type assertion can only fail if V is an interface. In that
+	// case, if the map has a `nil` in it, Go won't be able to
+	// type assert that nil into the interface value. (Note a nil
+	// *pointer* type asserts just fine, because it is still
+	// carrying a concrete type. Only nil interfaces lack any
+	// concrete type.) So if the type assertion fails, it must be
+	// a nil, here played by the zero we declared above, which
+	// must be `nil` even though the compiler can't realize that
+	// `nil` would be safe here.
+	finalVal, canAssert := val.(V)
+	if canAssert {
+		return finalVal, true
+	} else {
+		return zero, true
+	}
 }
 
 // Get retrieves the value out of a map like a one-element access of a
